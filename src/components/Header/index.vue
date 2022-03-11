@@ -13,13 +13,14 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 30px;
     background-color: rgb(231,231,231) ;
     color: rgb(124,124,124);
+    position:sticky;
+    z-index: 9999999
 }
 .left_header{
     padding:  3px 0 0 10%;

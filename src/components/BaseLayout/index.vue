@@ -21,7 +21,7 @@ export default {
 <style lang="scss" scoped>
 .baseLayout {
     height: 100%;
-    padding-top: 30px;
+    // padding-top: 30px;
     .main-content {
         height: 100%;
     }

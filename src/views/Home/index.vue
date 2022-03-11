@@ -53,9 +53,10 @@
                             2.栈内存的更新速度要快于堆内存，因为局部变量的生命周期很短；
                             3.栈内存存放的变量生命周期一旦结束就会被释放，而堆内存存放的实体会被垃圾回收机制不定时的回收。
                             <el-divider></el-divider>
-                            <qwe>展现量 190340  阅读 73526  评论 71  收藏 59</qwe>
+                            <span>展现量 190340  阅读 73526  评论 71  收藏 59</span>
                         </el-card>
                     </div>
+                    <el-pagination background layout="prev, pager, next" :total="50"></el-pagination>
                 </el-col>
             </el-row>
         </div>
@@ -74,18 +75,19 @@ export default {
     .item{
         height: 50px;
         background: rgb(170, 162, 162);
+        position:sticky;
+        z-index: 9999999
     }
     .context{
         background: #e7e7e7;
         height: 1200px;
         padding: 0 10% 0 10%;
+        flex: 1;
+        overflow-x: hidden;
     }
 
     .el-row {
         margin-bottom: 20px;
-        &:last-child {
-        margin-bottom: 0;
-        }
     }
     .el-icon-cold-drink{
         padding: 0 10px 0 0;
@@ -114,5 +116,9 @@ export default {
     }
     p{
         padding:  8px;
+    }
+    .el-pagination{
+        text-align: right;
+        padding: 20px 0px;
     }
 </style>
