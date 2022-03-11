@@ -1,11 +1,7 @@
 <template>
     <div class="baseLayout">
         <top-head />
-        <div class="main-content flex">
-            <main class="page-main flex-1">
-                <router-view />
-            </main>
-        </div>
+        <router-view />
     </div>
 </template>
 
@@ -21,7 +17,6 @@ export default {
 <style lang="scss" scoped>
 .baseLayout {
     height: 100%;
-    // padding-top: 30px;
     .main-content {
         height: 100%;
     }

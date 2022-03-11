@@ -1,7 +1,5 @@
 <template>
     <div class="top_context">
-        <!-- 主页头部导航栏 -->
-        <div class="item"></div>
         <!-- 正文内容 -->
         <div class="context">
             <el-row>
@@ -66,21 +64,28 @@
 export default {
     data () {
         return {
-            value1: ''
+            value1: '',
+            activeIndex: '1',
+            activeIndex2: '1'
         };
+    },
+    methods: {
+        handleSelect (key, keyPath) {
+            console.log(key, keyPath);
+        }
     }
 };
 </script>
 <style>
     .item{
-        height: 50px;
+        height: 60px;
         background: rgb(170, 162, 162);
         position:sticky;
         z-index: 9999999
     }
     .context{
         background: #e7e7e7;
-        height: 1200px;
+        height: 1300px;
         padding: 0 10% 0 10%;
         flex: 1;
         overflow-x: hidden;
