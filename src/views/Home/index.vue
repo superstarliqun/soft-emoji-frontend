@@ -41,7 +41,7 @@
                     </div>
                 </el-col>
                 <!-- 右侧card -->
-                <el-col :span="15">
+                <el-col :span="15" style="margin-top: -106px;">
                     <div class="grid-content" v-for="o in 5" :key="o">
                         <el-card class="box-card" :body-style="{ padding: '10px',margin:'0 0 0 20px' }">
                             初级工程师面试问题：
@@ -85,12 +85,12 @@ export default {
     }
     .context{
         background: #e7e7e7;
-        height: 1300px;
+        height: 1800px;
         padding: 0 10% 0 10%;
         flex: 1;
-        overflow-x: hidden;
+        /*裁剪 div 元素中内容的左/右边缘*/
+        /*overflow-x: hidden;*/
     }
-
     .el-row {
         margin-bottom: 20px;
     }
