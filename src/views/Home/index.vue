@@ -81,7 +81,7 @@ export default {
 .content{
     padding: 20px 10% 0 10%;
     background-color:#e7e7e7;
-    height: 800px;
+    height: 1500px;
 }
 .el-col{
     padding: 5px;
@@ -92,4 +92,12 @@ export default {
 ul{
     list-style:none;
 }
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+    width: 0 !important;
+}
+::-webkit-scrollbar {
+    width: 0 !important;height: 0;
+}
+
 </style>

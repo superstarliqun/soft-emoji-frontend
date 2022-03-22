@@ -11,13 +11,13 @@
         <div class="second_floor">
             <ul>
                 <li>Home</li>
-                <li>resume</li>
-                <li>settings</li>
-                <li>backstage</li>
-                <li>backstage</li>
-                <li>backstage</li>
-                <li>backstage</li>
-                <li>backstage</li>
+                <li>Resume</li>
+                <li>Settings</li>
+                <li>Blog</li>
+                <li>Propaganda</li>
+                <li>Notepad</li>
+                <li>Commodity</li>
+                <li>Backstage</li>
             </ul>
         </div>
     </header>
