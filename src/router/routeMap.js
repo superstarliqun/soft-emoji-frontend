@@ -1,4 +1,5 @@
 import BaseLayout from '@/components/BaseLayout';
+import notepad from '@/views/Notepad/index';
 import Empty from '@/views/404.vue';
 
 /*
@@ -35,6 +36,13 @@ const routeMap = [
                 meta: {
                     title: '测试页'
                 }
+            },
+            {
+                path: '/notepad',
+                meta: {
+                    title: '记事本'
+                },
+                component: notepad
             },
             {
                 path: '*',
