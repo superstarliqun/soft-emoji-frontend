@@ -1,54 +1,97 @@
 <template>
-    <div class="header_content">
-        <header class="header">
-            <span class="left_header">Hi 上午好！今天是2022年03月11号 星期五</span>
-            <span class="right_header">您好，欢迎访问明月个人博客 QQ登录/微信登录/会员登录</span>
-        </header>
-        <!-- 主页头部导航栏 -->
-        <div class="item">
-                <!-- <el-menu
-                    :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-                    <el-menu-item index="1">处理中心</el-menu-item>
-                    <el-submenu index="2">
-                        <template slot="title">我的工作台</template>
-                        <el-menu-item index="2-1">选项1</el-menu-item>
-                        <el-menu-item index="2-2">选项2</el-menu-item>
-                        <el-menu-item index="2-3">选项3</el-menu-item>
-                    </el-submenu>
-                    <el-menu-item index="3" disabled>消息中心</el-menu-item>
-                    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-                </el-menu> -->
-            </div>
-    </div>
+    <header>
+        <div class="first_floor">
+            <span class="top1">Hi <span v-html="dateData.hour<12?'上午好！':'下午好！'"/> 今天是 {{dateData.year}}年{{dateData.month}}月{{dateData.date}}号 {{weekday[dateData.week]}}</span>
+            <span class="floatright">您好，欢迎访问 明月 个人博客
+                <el-button type="primary" size="mini" plain>QQ登录</el-button>
+                <el-button type="success" size="mini" plain>微信登录</el-button>
+                <el-button type="warning" size="mini" plain>会员登录</el-button>
+            </span>
+        </div>
+        <div class="second_floor">
+            <ul>
+                <li>Home</li>
+                <li>resume</li>
+                <li>settings</li>
+                <li>backstage</li>
+                <li>backstage</li>
+                <li>backstage</li>
+                <li>backstage</li>
+                <li>backstage</li>
+            </ul>
+        </div>
+    </header>
 </template>
 
 <script>
 export default {
-
+    data () {
+        return {
+            dateData: {
+                year: '',
+                month: '',
+                date: '',
+                hour: '',
+                week: ''
+            },
+            weekday: { 0: '星期日', 1: '星期一', 2: '星期二', 3: '星期三', 4: '星期四', 5: '星期五', 6: '星期六' }
+        };
+    },
+    created () {
+        const nowDate = new Date();
+        this.dateData = {
+            year: nowDate.getFullYear(),
+            month: nowDate.getMonth() + 1,
+            date: nowDate.getDate(),
+            hour: nowDate.getHours(),
+            week: nowDate.getDay()
+        };
+    }
 };
 </script>
 
 <style lang="scss" scoped>
-.header_content{
-    position:sticky;
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.header{
+    position:fixed;
     z-index: 9999999;
-    width:100%
+    width:100%;
+    padding: 0 10% 0 10%;
 }
-.header {
-    top: 0;
-    left: 0;
-    width: 100%;
+ul{
+    list-style:none;
+    margin:0;
+}
+li{
+    display:inline;
+    margin-right: 50px;
+    cursor: pointer;
+}
+.first_floor{
+    background-color: #e7e7e7;
     height: 30px;
-    background-color: rgb(231,231,231) ;
-    color: rgb(124,124,124);
-
+    color: #7c7c7c;
+    padding: 0 10% 0 10%;
+    display: flex;
 }
-.left_header{
-    padding:  3px 0 0 10%;
-    float: left;
+.top1{
+    align-self: center;
 }
-.right_header{
-    padding:  3px 10% 10% 0 ;
-    float: right;
+.floatright{
+    right: 10%;
+    align-self: center;
+    position: absolute;
+}
+.second_floor{
+    padding: 0 10% 0 10%;
+    background-color: #3b3b3b;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    color: #e7e7e7;
+    font-size: 8px;
 }
 </style>
