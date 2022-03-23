@@ -10,14 +10,14 @@
         </div>
         <div class="second_floor">
             <ul>
-                <li>Home</li>
-                <li>Resume</li>
-                <li>Settings</li>
-                <li>Blog</li>
-                <li>Propaganda</li>
-                <li>Notepad</li>
-                <li>Commodity</li>
-                <li>Backstage</li>
+                <li><router-link to="/">Propaganda</router-link></li>
+                <li><router-link to="home">Home</router-link></li>
+                <li><router-link to="resume">Resume</router-link></li>
+                <li><router-link to="settings">Settings</router-link></li>
+                <li><router-link to="blog">Blog</router-link></li>
+                <li ><router-link to="notepad">Notepad</router-link></li>
+                <li><router-link to="commodity">Commodity</router-link></li>
+                <li><router-link to="backstage">Backstage</router-link></li>
             </ul>
         </div>
     </header>
@@ -94,4 +94,14 @@ li{
     color: #e7e7e7;
     font-size: 8px;
 }
+// 取消路由跳转默认样式
+.router-link-active {
+  text-decoration: none;
+  color: #fff;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 </style>
