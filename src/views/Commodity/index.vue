@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div style="height: 1500px;">
+    <el-skeleton />
+  </div>
 </template>
 
 <script>

@@ -47,7 +47,7 @@ module.exports = {
     /* webpack配置 */
     chainWebpack: (config) => {
         config.plugin('html').tap(options => {
-            options[0].title = 'vue-demo'; // 网页初始化标题配置
+            options[0].title = '个人博客系统'; // 网页初始化标题配置
             return options;
         });
         config.plugin('define').tap(options => {
