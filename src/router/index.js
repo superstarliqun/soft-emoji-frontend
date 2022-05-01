@@ -1,40 +1,52 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import routeMap from './routeMap.js';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-/*
-设置了语言方案时  属性name必加
-*/
 const routes = [
-    ...routeMap
-];
+  // 首页
+  {
+    path: '/',
+    component: () => import("../page/index/home.vue"),
+    name: '首页',
+    meta: '首页'
+  },
+  // 归档
+  {
+    path: '/file', component: () => import("../page/file"),
+    children: [
+      { path: '', component: () => import('../page/file/catalogue.vue') },
+      { path: 'details', component: () => import('../page/file/document-details.vue') }
+    ],
+    name: '归档',
+    meta: '归档'
+  },
+  // 清单
+  {
+    path: '/hobby', component: () => import("../page/hobby"),
+    children: [],
+    name: '清单',
+    meta: '清单'
+  },
+  // 留言板
+  {
+    path: '/message', component: () => import("../page/leavemessage"),
+    children: [],
+    name: '留言板',
+    meta: '留言板'
+  },
+  // 关于
+  {
+    path: '/about', component: () => import("../page/about"),
+    name: '关于',
+    meta: '关于'
+  }
+]
 
 const router = new VueRouter({
-    mode: 'history',
-    routes
-});
+  routes,
+  mode: "history",
+  base: process.env.BASE_URL
+})
 
-// 路由拦截
-const beforeEach = async (toRoute, fromRoute, next) => {
-    // 网页标题
-    if(toRoute.meta.title) document.title = toRoute.meta.title;
-    // 登录状态
-    // const token = store.state.token;
-    // if(token && toRoute.path === '/login') {
-    //     next({
-    //         path: '/404'
-    //     });
-    // };
-    // if(!token && toRoute.path !== '/login') {
-    //     next({
-    //         path: '/login'
-    //     });
-    // }
-    next();
-};
-
-router.beforeEach(beforeEach);
-
-export default router;
+export default router

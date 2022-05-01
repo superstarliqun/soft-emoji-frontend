@@ -1,25 +1,17 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import { action } from './actions';
-import { mutations } from './mutations';
-import { getters } from './getters';
-import { session, storage } from '@/utils';
-import language from '@/language';
+import Vue from 'vue'
+import Vuex from 'vuex'
+Vue.use(Vuex)
 
-Vue.use(Vuex);
+import {actions} from "./actions"
+import {state,mutations,getters} from "./mutations"
 
-const token = session.get('token') || '';
-const lang = storage.get('lang') || 'cn';
 
 export default new Vuex.Store({
-    state: {
-        // 语言
-        language,
-        local: lang,
-        count: 1,
-        token: token
-    },
-    mutations: mutations,
-    actions: action,
-    getters: getters
-});
+    state,
+    mutations,
+    actions,
+    getters,
+    modules:{
+
+    }
+})

@@ -1,86 +1,94 @@
-import Vue from 'vue';
-import axios from 'axios';
-import qs from 'qs';
-import { Message } from 'element-ui';
-import { API_DEFAULT_CONFIG } from '@/constants';
+import Vue from "vue";
+import axios from "axios";
+import qs from "qs"
+import store from '../store/index'
+import _ from 'lodash'
+import $urls from "../utils/urls";
+import { success, warning } from "../utils/alert"
 
-// 基础配置
-const service = axios.create({
-    baseURL: API_DEFAULT_CONFIG.baseUrl, // 请求地址
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' // 参数默认以表单形式提交
-    },
-    timeout: 15000 // 请求超时
-});
+// const baseUrl = $urls.targetUrl
+// console.log('baseUrl --------- ',baseUrl);
+
+// 开发环境
+if (process.env.NODE_ENV === "development") {
+  console.log("开发环境");
+  // Vue.prototype.$pre = "http://172.20.10.5:3000"
+  // url = "http://172.20.10.5:3000"
+}
+
+// 生产环境
+if (process.env.NODE_ENV === "production") {
+  console.log("生产环境");
+  // Vue.prototype.$pre = ""
+  // url = ""
+}
+
 
 // 请求拦截器
-// service.interceptors.request.use(
-//     (config) => {
-//         console.log(config)
-//         return config;
-//     },
-//     (error) => {
-//         // 错误抛到业务代码
-//         error.data = {};
-//         error.data.msg = "异常信息";
-//         return Promise.resolve(error);
-//     }
-// );
+axios.interceptors.request.use(config => {
+  // token验证
+  // if (config.url !== "/v1/login") {
+  //   config.headers.authorization = store.state.user.token
+  // }
+  // console.log('config ---- 请求拦截器 ---- ',config);
+  return config
+})
 
 // 响应拦截器
-service.interceptors.response.use((response) => {
-    return response.data;
-}, (error) => {
-    Message.error('error');
-    // // 自定义接口报错信息
-    // if(error.code === 'ECONNABORTED' && error.message.indexOf('timeout') !== -1) {
-    // // 超时报错
-    //     Message.error('请求超时');
-    // } else if(error.code === 'ECONNABORTED' && error.message.indexOf('Network Error') !== -1) {
-    //     Message.error('error');
-    // }
-    return Promise.resolve(error);
-});
+axios.interceptors.response.use(res => {
+  console.group("本次请求的路径是：" + res.config.url)
+  console.log(res.data);
+  console.groupEnd("拦截器结束")
+  // 登陆权限过期验证
+  // if (res.data.msg == "登录已过期或访问权限受限") {
+  //   // 跳转登录页
+  //   window.location = baseUrl + "/login"
+  //   warning("登录已过期，请重新登陆！")
+  // }
+  return res
+})
 
-/*
-get/post第三个参数(可选)：取消请求的唯一key(必须与请求名称一致) 加上此参数时，请求重复时会默认取消上一个请求
-请求取消方法：this.$cancelApi[key]
-请求调用方法：this.$http[key]({axios请求参数})
+
+
+/* 
+    get请求
+      url   请求地址
+      params  请求参数
 */
-
-Vue.prototype.$cancelApi = {}; // 取消请求集合
-const CancelToken = axios.CancelToken;
-
-function cancelToken (cancelName) {
-    return new CancelToken(function executor (c) {
-        if(cancelName) {
-            const cancelFn = function (cn) {
-                return (msg) => cn(msg);
-            };
-            Object.prototype.hasOwnProperty.call(Vue.prototype.$cancelApi, cancelName) && Vue.prototype.$cancelApi[cancelName]('取消重复请求');
-            Vue.prototype.$cancelApi[cancelName] = cancelFn.call(this, c);
-        }
-    });
+export const get = (url, params = {}) => {
+  return new Promise((resolve, error) => {
+    axios.get(url, {
+      params: params
+    }).then(res => {
+      resolve(res.data)
+    }).catch(err => {
+      error(err)
+    })
+  })
 }
 
-/* get */
-export function get (url, opt, cancelName) {
-    return service.get(url, {
-        ...opt,
-        params: opt.data,
-        // 取消请求
-        cancelToken: cancelToken(cancelName)
-    });
-}
+/* 
+    post请求
 
-/* post */
-export function post (url, opt, cancelName) {
-    opt.data = qs.stringify(opt.data);
-    return service({
-        method: 'POST',
-        url: url,
-        ...opt,
-        // 取消请求
-        cancelToken: cancelToken(cancelName)
-    });
+*/
+export const post = (url, params = {}, isFile = false) => {
+  let data = null
+  if (isFile) {
+    // 有文件
+    data = new FormData()
+    for (let i in params) {
+      data.append(i, params[i])
+    }
+  } else {
+    // 无文件
+    data = qs.stringify(params)
+  }
+
+  return new Promise((resolve, error) => {
+    axios.post(url, data).then(res => {
+      resolve(res.data)
+    }).catch(err => {
+      error(err)
+    })
+  })
 }
