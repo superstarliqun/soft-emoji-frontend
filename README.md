@@ -1,5 +1,3 @@
-# zhiyiblog
-
 ## Project setup
 ```
 npm install
